@@ -3,6 +3,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const helmet = require('helmet')
+const imageUploadRouter = require('./image-upload/image-upload-router')
 const { NODE_ENV } = require('./config')
 
 const app = express ()
@@ -18,6 +19,8 @@ const morganOption = (NODE_ENV === 'production')
     app.get('/', (req, res) => {
         res.send('Hello, world!')
     })
+
+    app.post('/imageupload', imageUploadRouter)
 
     app.use(function errorHandler(error, req, res, next) {
           let response
