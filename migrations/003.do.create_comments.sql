@@ -1,8 +1,7 @@
-CREATE TABLE "posts" (
+CREATE TABLE "comments" (
   "id" SERIAL PRIMARY KEY,
-  "memeImg" TEXT NOT NULL,
-  "description" TEXT,
-  "likes" INTEGER,
+  "comment" TEXT NOT NULL,
+  "posts_id" INTEGER REFERENCES "posts"(id),
   "user_id" INTEGER REFERENCES "user"(id)
     ON DELETE CASCADE NOT NULL
 );

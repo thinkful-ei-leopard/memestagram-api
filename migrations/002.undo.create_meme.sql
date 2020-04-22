@@ -1,1 +1,1 @@
-DROP TABLE "meme";
+DROP TABLE "posts";

@@ -3,5 +3,5 @@ CREATE TABLE "user" (
   "name" TEXT NOT NULL,
   "username" TEXT NOT NULL UNIQUE,
   "password" TEXT NOT NULL,
-  "profimg" BYTEA NOT NULL
+  "userImg" TEXT NOT NULL
 );
