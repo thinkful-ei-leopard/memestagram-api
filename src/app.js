@@ -15,11 +15,7 @@ const morganOption = (NODE_ENV === 'production')
     app.use(morgan(morganOption))
     app.use(helmet())
     app.use(cors())
-
-    app.get('/', (req, res) => {
-        res.send('Hello, world!')
-    })
-
+    
     app.post('/imageupload', imageUploadRouter)
 
     app.use(function errorHandler(error, req, res, next) {
