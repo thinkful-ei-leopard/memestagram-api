@@ -5,6 +5,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const postsRouter = require('./posts/posts-router');
+const userRouter = require('./user/user-router');
+const authRouter = require('./auth/auth-router');
 const commentsRouter = require('./comment/comment-router');
 const app = express ();
 
@@ -16,12 +18,11 @@ app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
 
-app.use('/api/post', postsRouter);
-app.use('/api/comment', commentsRouter);
+app.use('/api/comments', commentsRouter);
+app.use('/api/posts', postsRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response
@@ -34,4 +35,4 @@ app.use(function errorHandler(error, req, res, next) {
   res.status(500).json(response)
 })
 
-module.exports = app
+module.exports = app;
