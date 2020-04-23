@@ -2,16 +2,16 @@ const express = require('express')
 const path = require('path')
 const CommentsService = require('./comment-service')
 const xss = require('xss')
-
-const commentsRouter = express.Router()
-const jsonBodyParser = express.json()
+const { requireAuth } = require('../middleware/jwt-auth');
+const commentsRouter = express.Router();
+const jsonBodyParser = express.json();
 
 const serializeComment = comment => ({
-    id: comment.id,
-    comment: xss(comment.comment),
-    posts_id: comment.posts_id,
-    user_id: comment.user_id
-  })
+  id: comment.id,
+  comment: xss(comment.comment),
+  posts_id: comment.posts_id,
+  user_id: comment.user_id
+});
 
 commentsRouter
   .route('/:post_id')
@@ -31,9 +31,9 @@ commentsRouter
       .catch(next);
   })
   .post(requireAuth, jsonBodyParser, (req, res, next) => {
-      const {comment, post_id, user_id}=req.body;
-      const newComment ={comment, post_id, user_id }
-      for (const [key, value] of Object.entries(newComment))
+    const {comment, post_id, user_id}=req.body;
+    const newComment ={comment, post_id, user_id };
+    for (const [key, value] of Object.entries(newComment))
       if (value == null)
         return res.status(400).json({
           error: `Missing '${key}' in request body`
@@ -49,6 +49,8 @@ commentsRouter
           .location(path.posix.join(req.originalUrl, `/${comment.id}`))
           .json(CommentsService.serializeReview(comment))
       })
-      .catch(next)
-    })
-  }
+      .catch(next);
+  });
+
+module.exports = commentsRouter;
+  

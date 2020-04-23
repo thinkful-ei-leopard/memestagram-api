@@ -5,8 +5,8 @@ const AuthService = require('./auth-service');
 
 authRouter
   .post('/login', jsonBodyParser, (req, res, next)=>{
-    const { user_name, password}=req.body;
-    const loginUser ={user_name, password};
+    const { username, password}=req.body;
+    const loginUser ={username, password};
 
     for(const[key, value] of Object.entries(loginUser))
       if(value == null)

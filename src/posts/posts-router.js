@@ -2,7 +2,7 @@ const express =require('express');
 const path = require('path');
 const postsRouter = express.Router();
 const { requireAuth } = require('../middleware/jwt-auth');
-const PostsService = require('./post-service');
+const PostsService = require('./posts-service');
 const jsonBodyParser= express.json();
 
 const serializePost = data =>({
