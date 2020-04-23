@@ -40,14 +40,15 @@ const PostsService={
       .returning('*')
       .then(([data]) => data);
   },
-  serializeData(post){
-    
+  serializePost(post){ 
     return{
       id:post.id,
       memeImg:post.memeImg,
       description:xss(post.description),
       likes:post.likes,
       user_id:post.user_id,
+      username:post.username,
+      userImg:post.userImg
     };
   }
     
