@@ -32,7 +32,7 @@ userRouter
 
                 const newUser = {
                     username, 
-                    password, hashedPassword,
+                    password: hashedPassword,
                     name,
                 }
 
@@ -50,7 +50,9 @@ userRouter
                     .status(201)
                     .location(path.posix.join(req.originalURL, `/${user.id}`))
                     .json(UserService.serializeUser(user))
-        } 
+        } catch(error) {
+            next(error)
+          }
     })
 
     module.exports = userRouter
