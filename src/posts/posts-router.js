@@ -26,25 +26,11 @@ postsRouter
             error:{message:`Data doesn't exist`}
           });
         }
-        res.json(data.map(serializePost));
+        res.json(data.map(PostsService.serializePost));
       })
       .catch(next);
   })
-  .get(requireAuth, (req, res, next) => {
-    PostsService.getAllUserPosts(
-      req.app.get('db'),
-      req.user.id
-    )
-      .then(data =>{
-        if(!data){
-          return res.status(404).json({
-            error:{message:`Data doesn't exist`}
-          });
-        }
-        res.json(data.map(serializePost));
-      })
-      .catch(next);
-  })
+ 
   .post(requireAuth, jsonBodyParser, (req, res, next)=>{
     const {memeImg, description, likes, user_id}=req.body;
     const newPost={memeImg, description, likes, user_id}
@@ -63,6 +49,24 @@ postsRouter
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${post.id}`))
           .json(serializePost(post));
+      })
+      .catch(next);
+  });
+
+postsRouter
+  .route('/:user_id')
+  .get(requireAuth, (req, res, next) => {
+    PostsService.getAllUserPosts(
+      req.app.get('db'),
+      req.user.id
+    )
+      .then(data =>{
+        if(!data){
+          return res.status(404).json({
+            error:{message:`Data doesn't exist`}
+          });
+        }
+        res.json(data.map(serializePost));
       })
       .catch(next);
   });

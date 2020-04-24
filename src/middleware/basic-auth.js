@@ -24,7 +24,7 @@ function requireAuth(res, req, next){
   }
 
   req.app.get('db')('user')
-    .where({ user_name: tokenUserName})
+    .where({ username: tokenUserName})
     .first()
     .then(user =>{
       if(!user){
