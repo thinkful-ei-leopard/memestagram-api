@@ -18,7 +18,7 @@ postsRouter
   .get(requireAuth, (req, res, next) => {
     PostsService.getAllPosts(
       req.app.get('db'),
-      req.user.id
+     // req.user.id
     )
       .then(data =>{
         if(!data){
@@ -58,7 +58,7 @@ postsRouter
   .get(requireAuth, (req, res, next) => {
     PostsService.getAllUserPosts(
       req.app.get('db'),
-      req.user.id
+      //req.user.id
     )
       .then(data =>{
         if(!data){

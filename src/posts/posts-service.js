@@ -19,8 +19,8 @@ const PostsService={
   getAllUserPosts(db, id){
     return db
       .from('posts')
-      .select('*')
-      .innerJoin('user', 'posts.user_id', 'user.id')
+      .select('posts.*', 'user.username', 'user.userImg')
+      .leftJoin('user', 'posts.user_id', 'user.id')
       .where('posts.user_id', id);
   },
      
