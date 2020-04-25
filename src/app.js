@@ -19,10 +19,10 @@ app.use(helmet());
 app.use(cors());
 
 
-app.use('/comments', commentsRouter);
-app.use('/posts', postsRouter);
-app.use('/auth', authRouter);
-app.use('/users', userRouter);
+app.use('/api/comments', commentsRouter);
+app.use('/api/posts', postsRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response

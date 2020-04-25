@@ -23,10 +23,10 @@ const UserService = {
     if (password.length > 30) {
       return 'Password must be less than 30 characters';
     }
-    if (password.startsWith('') || password.endsWith('')) {
+    if (password.startsWith(' ') || password.endsWith(' ')) {
       return 'Password must not start or end with empty spaces';
     }
-    if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.text(password)) {
+    if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
       return 'Password must contain one upper case, lower case, number and special character';
     }
     return null;
