@@ -16,20 +16,20 @@ authRouter
      
     AuthService.getUserWithUserName(
       req.app.get('db'),
-      loginUser.user_name
+      loginUser.username
     )
       .then(dbUser =>{
         if(!dbUser)
           return res.status(400).json({
-            error:'Incorrect user_name or password'
+            error:'Incorrect username or password'
           });
         return AuthService.comparePasswords(loginUser.password, dbUser.password)
           .then(compareMatch =>{
             if(!compareMatch)
               return res.status(400).json({
-                error:'Incorrect user_name or password',
+                error:'Incorrect username or password',
               });
-            const sub =dbUser.user_name;
+            const sub =dbUser.username;
             const payload = {user_id: dbUser.id};
             //The client can then use the JWT for every request to protected endpoints
             res.send({
