@@ -11,9 +11,9 @@ const PostsService={
     return db
       .from('posts')
       .select('posts.*', 'comments.comment', 'user.username', 'user.userImg')
-      .leftJoin('comments', 'comments.user_id', 'posts.user_id')
+      .leftJoin('comments', 'comments.posts_id', 'posts.id')
       .leftJoin('user','posts.user_id', 'user.id')
-      .where('id', id)
+      .where('posts.id', id)
       .first();
   },
   getAllUserPosts(db, id){

@@ -12,13 +12,23 @@ const serializePost = data =>({
   likes:data.likes,
   user_id:data.user_id
 });
+const serializePostandComments = data =>({
+  id:data.id,
+  memeImg:data.memeImg,
+  description:data.description,
+  likes:data.likes,
+  user_id:data.user_id,
+  username:data.username,
+  userImg:data.userImg,
+  comment:data.comment
+});
 
 postsRouter
   .route('/')
   .get(requireAuth, (req, res, next) => {
     PostsService.getAllPosts(
       req.app.get('db'),
-     // req.user.id
+      req.user.id
     )
       .then(data =>{
         if(!data){
@@ -58,7 +68,7 @@ postsRouter
   .get(requireAuth, (req, res, next) => {
     PostsService.getAllUserPosts(
       req.app.get('db'),
-      //req.user.id
+      req.user.id
     )
       .then(data =>{
         if(!data){
@@ -66,36 +76,35 @@ postsRouter
             error:{message:`Data doesn't exist`}
           });
         }
-        res.json(data.map(serializePost));
+        res.json(data.map(PostsService.serializePost));
       })
       .catch(next);
   });
-
+ 
 postsRouter
   .route('/:post_id')
-  .all(requireAuth, (req, res, next)=>{
+  .get(requireAuth, (req, res, next)=>{
     PostsService.getById(
       req.app.get('db'),
-      req.params.post_id
-    )
+      req.params.posts.id
+    ) 
       .then(post =>{
         if(!post){
           return res.status(404).json({
             error:{ message: `Post doesn't excist`}
           });
         }
-        res.post = post;
+        res.json(serializePostandComments(post));
+        
         next()
       })
       .catch(next);
   })
-  .get((req, res, next)=>{
-    res.json(serializePost(res.post));
-  })
-  .delete((req, res, next)=>{
+  
+  .delete(requireAuth, (req, res, next)=>{
     PostsService.deleteMyPost(
       req.app.get('db'),
-      req.params.post_id
+      req.params.posts.id
     )
       .then(data =>{
         res.status(204).end();

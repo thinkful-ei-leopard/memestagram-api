@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
+const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
 
 const UserService = {
   hasUserWithUserName(db, username) {
@@ -23,7 +23,7 @@ const UserService = {
     if (password.length > 30) {
       return 'Password must be less than 30 characters';
     }
-    if (password.startsWith('') || password.endsWith('')) {
+    if (password.startsWith(' ') || password.endsWith(' ')) {
       return 'Password must not start or end with empty spaces';
     }
     if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.text(password)) {
@@ -37,7 +37,7 @@ const UserService = {
   serializeUser(user) {
     return {
       id: user.id,
-      profileName: user.profileName,
+      name: user.name,
       username: user.username,
     };
   },

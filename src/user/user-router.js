@@ -32,7 +32,7 @@ userRouter
 
                 const newUser = {
                     username, 
-                    password, hashedPassword,
+                    password:hashedPassword,
                     name,
                 }
 
