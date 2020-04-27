@@ -41,7 +41,7 @@ postsRouter
       .catch(next);
   })
  
-  .post( requireAuth,jsonBodyParser, (req, res, next)=>{
+  .post(requireAuth, jsonBodyParser, (req, res, next)=>{
     const {memeImg, description}=req.body;
     const newPost={memeImg, description};
        
