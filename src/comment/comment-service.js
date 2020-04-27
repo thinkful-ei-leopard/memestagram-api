@@ -1,10 +1,10 @@
 const xss = require('xss');
 
 const CommentsService={
-  getPostAllcommnet(db, id){
+  getPostAllcomment(db, id){
     return db
-      .from('commnets')
-      .select('commnets.*', 'user.username')
+      .from('comments')
+      .select('comments.*', 'user.username')
       .leftJoin('user','comments.user_id', 'user.id')
       .where('comments.posts_id', id);
   },
