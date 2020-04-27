@@ -20,12 +20,11 @@ const serializePostandComments = data =>({
   user_id:data.user_id,
   username:data.username,
   userImg:data.userImg,
-  comment:data.comment
 });
 
 postsRouter
   .route('/')
-  .get(requireAuth, (req, res, next) => {
+  .get( (req, res, next) => {
     PostsService.getAllPosts(
       req.app.get('db'),
       req.user.id
@@ -42,8 +41,8 @@ postsRouter
   })
  
   .post(requireAuth, jsonBodyParser, (req, res, next)=>{
-    const {memeImg, description}=req.body;
-    const newPost={memeImg, description};
+    const {memeImg, description, likes=0}=req.body;
+    const newPost={memeImg, description, likes};
        
     for(const [key, value] of Object.entries(newPost))
       if(value == null)
