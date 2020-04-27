@@ -32,7 +32,7 @@ userRouter
 
                 const newUser = {
                     username, 
-                    password:hashedPassword,
+                    password: hashedPassword,
                     name,
                 }
 
@@ -41,18 +41,13 @@ userRouter
                     newUser
                 )
 
-                await UserService.populateUserWords(
-                    req.app.get('db'),
-                    user.id
-                )
-
                 res
                     .status(201)
-                    .location(path.posix.join(req.originalURL, `/${user.id}`))
+                    .location(path.posix.join('req.originalURL', `/${user.id}`))
                     .json(UserService.serializeUser(user))
         } catch(error) {
             next(error)
-        }
+          }
     })
 
     module.exports = userRouter
