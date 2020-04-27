@@ -1,10 +1,9 @@
-const knex = require('knex')
-const { PORT, DATABASE_URL } = require('./config')
+require('dotenv').config()
 const express = require('express')
 const cloudinary = require('cloudinary')
 const formData = require('express-form-data')
 const cors = require('cors')
-require('dotenv').config()
+const { CLIENT_ORIGIN } = require('./config')
 
 const app = express()
 
@@ -15,7 +14,7 @@ cloudinary.config({
   })
     
   app.use(cors({ 
-    origin: PORT
+    origin: CLIENT_ORIGIN 
   })) 
   
   app.use(formData.parse())
@@ -30,14 +29,3 @@ cloudinary.config({
       .then(results => res.json(results))
   })
 
-
-const db = knex({
-    client: 'pg',
-    connection: DATABASE_URL,
-})
-
-app.set('db', db)
-
-app.listen(PORT, () => {
-    console.log(`Server listening at http://localhost${PORT}`)
-})
