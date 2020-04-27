@@ -41,15 +41,16 @@ postsRouter
       .catch(next);
   })
  
-  .post(requireAuth, jsonBodyParser, (req, res, next)=>{
-    const {memeImg, description, likes, user_id}=req.body;
-    const newPost={memeImg, description, likes, user_id}
+  .post( requireAuth,jsonBodyParser, (req, res, next)=>{
+    const {memeImg, description}=req.body;
+    const newPost={memeImg, description};
        
     for(const [key, value] of Object.entries(newPost))
       if(value == null)
         return res.status(400).json({
           error:{ message: `Missing '${key}' in request body`}
         });
+    newPost.user_id= req.user.id;
     PostsService.insertMyPost(
       req.app.get('db'),
       newPost
