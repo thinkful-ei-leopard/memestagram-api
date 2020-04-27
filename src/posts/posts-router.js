@@ -58,7 +58,7 @@ postsRouter
       .then(post =>{
         res
           .status(201)
-          .location(path.posix.join(req.originalUrl, `/${post.id}`))
+          .location(path.posix.join('req.originalUrl', `/${post.id}`))
           .json(serializePost(post));
       })
       .catch(next);
