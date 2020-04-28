@@ -30,6 +30,27 @@ VALUES
       'When you know you messed up...', 
       0, 
       1
+    ),
+    (
+      2,
+      'https://live.staticflickr.com/5611/15033991623_66352974b6_z.jpg', 
+      'When you know you messed up...', 
+      0, 
+      1
+    ),
+    (
+      3,
+      'https://live.staticflickr.com/5611/15033991623_66352974b6_z.jpg', 
+      'When you know you messed up...', 
+      0, 
+      1
+    ),
+    (
+      4,
+      'https://live.staticflickr.com/5611/15033991623_66352974b6_z.jpg', 
+      'When you know you messed up...', 
+      0, 
+      1
     );
 
     INSERT INTO "comments" ("id", "comment", "posts_id", "user_id")

@@ -26,8 +26,8 @@ postsRouter
   .route('/')
   .get( (req, res, next) => {
     PostsService.getAllPosts(
-      req.app.get('db'),
-      req.user.id
+      req.app.get('db')
+      // req.user.id
     )
       .then(data =>{
         if(!data){
@@ -64,11 +64,11 @@ postsRouter
   });
 
 postsRouter
-  .route('/:user_id')
-  .get(requireAuth, (req, res, next) => {
+  .route('/users/:user_id')
+  .get((req, res, next) => {
     PostsService.getAllUserPosts(
       req.app.get('db'),
-      req.user.id
+      1
     )
       .then(data =>{
         if(!data){
@@ -83,10 +83,10 @@ postsRouter
  
 postsRouter
   .route('/:post_id')
-  .get(requireAuth, (req, res, next)=>{
+  .get( (req, res, next)=>{
     PostsService.getById(
       req.app.get('db'),
-      req.params.posts.id
+      // req.params.post_id
     ) 
       .then(post =>{
         if(!post){
