@@ -26,8 +26,8 @@ postsRouter
   .route('/')
   .get( (req, res, next) => {
     PostsService.getAllPosts(
-      req.app.get('db'),
-      req.user.id
+      req.app.get('db')
+      //req.user.id
     )
       .then(data =>{
         if(!data){
@@ -62,7 +62,7 @@ postsRouter
       })
       .catch(next);
   });
-
+/*
 postsRouter
   .route('/:user_id')
   .get(requireAuth, (req, res, next) => {
@@ -80,13 +80,14 @@ postsRouter
       })
       .catch(next);
   });
- 
+ */
 postsRouter
   .route('/:post_id')
-  .get(requireAuth, (req, res, next)=>{
+  .get( (req, res, next)=>{
     PostsService.getById(
       req.app.get('db'),
-      req.params.posts.id
+      console.log(req.params),
+      //req.params.post_id
     ) 
       .then(post =>{
         if(!post){
@@ -96,7 +97,7 @@ postsRouter
         }
         res.json(serializePostandComments(post));
         
-        next()
+        next();
       })
       .catch(next);
   })
