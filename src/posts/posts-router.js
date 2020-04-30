@@ -40,7 +40,7 @@ postsRouter
       .catch(next);
   })
  
-  .post(requireAuth, jsonBodyParser, (req, res, next)=>{
+  .post(requireAuth, jsonBodyParser, (req, res, next) => {
     const {memeImg, description, likes=0}=req.body;
     const newPost={memeImg, description, likes};
        
@@ -61,7 +61,21 @@ postsRouter
           .json(serializePost(post));
       })
       .catch(next);
-  });
+  })
+
+  .patch(jsonBodyParser, (req, res, next) => {
+    const { id, likes } = req.body
+    
+    PostsService.updateLikes(
+      req.app.get('db'),
+      id,
+      likes
+    )
+      .then(numRowsAffected => {
+        res.status(204).end()
+      })
+      .catch(next)
+  })
 
 postsRouter
   .route('/users/:user_id')
