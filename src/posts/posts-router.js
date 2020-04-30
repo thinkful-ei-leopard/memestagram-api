@@ -26,7 +26,8 @@ postsRouter
   .route('/')
   .get( (req, res, next) => {
     PostsService.getAllPosts(
-      req.app.get('db')  
+      req.app.get('db')
+      // req.user.id
     )
       .then(data =>{
         if(!data){
@@ -67,7 +68,7 @@ postsRouter
   .get((req, res, next) => {
     PostsService.getAllUserPosts(
       req.app.get('db'),
-      req.user.id
+      1
     )
       .then(data =>{
         if(!data){
