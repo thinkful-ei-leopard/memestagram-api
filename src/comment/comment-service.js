@@ -1,6 +1,13 @@
 const xss = require('xss');
 
 const CommentsService={
+  getPostAllcomment(db, id){
+    return db
+      .from('comments')
+      .select('comments.*', 'user.username')
+      .leftJoin('user','comments.user_id', 'user.id')
+      .where('comments.posts_id', id);
+  },
  
   insertComment(db, newComment) {
     return db

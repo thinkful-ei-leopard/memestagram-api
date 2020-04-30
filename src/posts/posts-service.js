@@ -10,17 +10,16 @@ const PostsService={
   getById(db, id){
     return db
       .from('posts')
-      .select('posts.*', 'comments.comment', 'user.username', 'user.userImg')
-      .leftJoin('comments', 'comments.user_id', 'posts.user_id')
+      .select('posts.*', 'user.username', 'user.userImg')
       .leftJoin('user','posts.user_id', 'user.id')
-      .where('id', id)
+      .where('posts.id', id)
       .first();
   },
   getAllUserPosts(db, id){
     return db
       .from('posts')
-      .select('*')
-      .innerJoin('user', 'posts.user_id', 'user.id')
+      .select('posts.*', 'user.username', 'user.userImg')
+      .leftJoin('user', 'posts.user_id', 'user.id')
       .where('posts.user_id', id);
   },
      

@@ -12,13 +12,22 @@ const serializePost = data =>({
   likes:data.likes,
   user_id:data.user_id
 });
+const serializePostandComments = data =>({
+  id:data.id,
+  memeImg:data.memeImg,
+  description:data.description,
+  likes:data.likes,
+  user_id:data.user_id,
+  username:data.username,
+  userImg:data.userImg,
+});
 
 postsRouter
   .route('/')
-  .get(requireAuth, (req, res, next) => {
+  .get( (req, res, next) => {
     PostsService.getAllPosts(
-      req.app.get('db'),
-      req.user.id
+      req.app.get('db')
+      // req.user.id
     )
       .then(data =>{
         if(!data){
@@ -32,14 +41,15 @@ postsRouter
   })
  
   .post(requireAuth, jsonBodyParser, (req, res, next)=>{
-    const {memeImg, description, likes, user_id}=req.body;
-    const newPost={memeImg, description, likes, user_id}
+    const {memeImg, description, likes=0}=req.body;
+    const newPost={memeImg, description, likes};
        
     for(const [key, value] of Object.entries(newPost))
       if(value == null)
         return res.status(400).json({
           error:{ message: `Missing '${key}' in request body`}
         });
+    newPost.user_id= req.user.id;
     PostsService.insertMyPost(
       req.app.get('db'),
       newPost
@@ -54,11 +64,11 @@ postsRouter
   });
 
 postsRouter
-  .route('/:user_id')
-  .get(requireAuth, (req, res, next) => {
+  .route('/users/:user_id')
+  .get((req, res, next) => {
     PostsService.getAllUserPosts(
       req.app.get('db'),
-      req.user.id
+      1
     )
       .then(data =>{
         if(!data){
@@ -66,36 +76,35 @@ postsRouter
             error:{message:`Data doesn't exist`}
           });
         }
-        res.json(data.map(serializePost));
+        res.json(data.map(PostsService.serializePost));
       })
       .catch(next);
   });
-
+ 
 postsRouter
   .route('/:post_id')
-  .all(requireAuth, (req, res, next)=>{
+  .get( (req, res, next)=>{ 
     PostsService.getById(
       req.app.get('db'),
       req.params.post_id
-    )
+    ) 
       .then(post =>{
         if(!post){
           return res.status(404).json({
             error:{ message: `Post doesn't excist`}
           });
         }
-        res.post = post;
-        next()
+        res.json(serializePostandComments(post));
+        
+        next();
       })
       .catch(next);
   })
-  .get((req, res, next)=>{
-    res.json(serializePost(res.post));
-  })
-  .delete((req, res, next)=>{
+  
+  .delete(requireAuth, (req, res, next)=>{
     PostsService.deleteMyPost(
       req.app.get('db'),
-      req.params.post_id
+      req.params.posts.id
     )
       .then(data =>{
         res.status(204).end();
