@@ -20,7 +20,7 @@ cloudinary.config({
   
 app.use(formData.parse());
   
-app.post('/imageupload', (req, res) => {
+app.post('/image-upload', (req, res) => {
   
   const values = Object.values(req.files);
   const promises = values.map(image => cloudinary.uploader.upload(image.path));
