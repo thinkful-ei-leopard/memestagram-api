@@ -1,4 +1,5 @@
-const xss = require('xss')
+'use strict';
+const xss = require('xss');
 
 const PostsService={
   getAllPosts(db){
@@ -38,6 +39,12 @@ const PostsService={
       .into('posts')
       .returning('*')
       .then(([data]) => data);
+  },
+  updateLikes(db, id, likes){
+    return db 
+      .from('posts')
+      .where('posts.id', id )
+      .update({likes: likes});
   },
   serializePost(post){ 
     return{
