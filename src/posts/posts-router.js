@@ -83,10 +83,10 @@ postsRouter
  
 postsRouter
   .route('/:post_id')
-  .get( (req, res, next)=>{
+  .get( (req, res, next)=>{ 
     PostsService.getById(
       req.app.get('db'),
-      // req.params.post_id
+      req.params.post_id
     ) 
       .then(post =>{
         if(!post){
@@ -96,7 +96,7 @@ postsRouter
         }
         res.json(serializePostandComments(post));
         
-        next()
+        next();
       })
       .catch(next);
   })
