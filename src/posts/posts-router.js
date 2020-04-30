@@ -26,8 +26,7 @@ postsRouter
   .route('/')
   .get( (req, res, next) => {
     PostsService.getAllPosts(
-      req.app.get('db')
-      //req.user.id
+      req.app.get('db')  
     )
       .then(data =>{
         if(!data){
@@ -62,10 +61,10 @@ postsRouter
       })
       .catch(next);
   });
-/*
+
 postsRouter
-  .route('/:user_id')
-  .get(requireAuth, (req, res, next) => {
+  .route('/users/:user_id')
+  .get((req, res, next) => {
     PostsService.getAllUserPosts(
       req.app.get('db'),
       req.user.id
@@ -80,14 +79,13 @@ postsRouter
       })
       .catch(next);
   });
- */
+ 
 postsRouter
   .route('/:post_id')
-  .get( (req, res, next)=>{
+  .get( (req, res, next)=>{ 
     PostsService.getById(
       req.app.get('db'),
-      console.log(req.params),
-      //req.params.post_id
+      req.params.post_id
     ) 
       .then(post =>{
         if(!post){

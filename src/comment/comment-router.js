@@ -15,12 +15,11 @@ const serializeGetComment = comment =>({
 });
 
 commentsRouter
-  .route('/')
+  .route('/:post_id')
   .get( (req, res, next)=>{
     CommentsService.getPostAllcomment(
       req.app.get('db'),
-      1
-      //req.params.posts.id
+      req.params.post_id
     )
       .then(data =>{
         if(!data){
