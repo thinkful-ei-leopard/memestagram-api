@@ -1,3 +1,4 @@
+'use strict';
 const express =require('express');
 const path = require('path');
 const postsRouter = express.Router();
@@ -82,7 +83,7 @@ postsRouter
   .get((req, res, next) => {
     PostsService.getAllUserPosts(
       req.app.get('db'),
-      1
+      req.params.user_id
     )
       .then(data =>{
         if(!data){
