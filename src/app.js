@@ -8,7 +8,7 @@ const postsRouter = require('./posts/posts-router');
 const userRouter = require('./user/user-router');
 const authRouter = require('./auth/auth-router');
 const commentsRouter = require('./comment/comment-router');
-const cloudinary = require('cloudinary').v2
+const cloudinary = require('cloudinary')
 const formData = require('express-form-data')
 const app = express ();
 
@@ -28,8 +28,8 @@ app.use('/api/users', userRouter);
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
-  api_key: process.env.API_KEY, 
-  api_secret: process.env.API_SECRET
+  api_key: process.env.CLOUD_API_KEY, 
+  api_secret: process.env.CLOUD_API_SECRET
 });
   
 app.use(formData.parse());
