@@ -8,7 +8,7 @@ const postsRouter = require('./posts/posts-router');
 const userRouter = require('./user/user-router');
 const authRouter = require('./auth/auth-router');
 const commentsRouter = require('./comment/comment-router');
-const cloudinary = require('cloudinary')
+const cloudinary = require('cloudinary').v2
 const formData = require('express-form-data')
 const app = express ();
 
@@ -20,7 +20,6 @@ const morganOption = (NODE_ENV === 'production')
 app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
-
 
 app.use('/api/comments', commentsRouter);
 app.use('/api/posts', postsRouter);
