@@ -31,7 +31,8 @@ commentsRouter
       })
       .catch(next);
   })
-  .post(requireAuth, jsonBodyParser, (req, res, next) => {
+
+  .post(jsonBodyParser, (req, res, next) => {
     const {comment,user_id, posts_id}=req.body;
     const newComment ={comment, user_id, posts_id};
     for (const [key, value] of Object.entries(newComment))

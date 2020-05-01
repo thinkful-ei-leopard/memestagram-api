@@ -64,7 +64,7 @@ postsRouter
   })
 
   .patch(jsonBodyParser, (req, res, next) => {
-    const { id, likes } = req.body
+    const { id, likes } = req.body;
     
     PostsService.updateLikes(
       req.app.get('db'),
