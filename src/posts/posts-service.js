@@ -11,7 +11,7 @@ const PostsService={
   getById(db, id){
     return db
       .from('posts')
-      .select('posts.*', 'comments.comment', 'user.username', 'user.userImg')
+      .select('posts.*', 'user.username', 'user.userImg')
       .leftJoin('user','posts.user_id', 'user.id')
       .where('posts.id', id)
       .first();

@@ -39,8 +39,7 @@ commentsRouter
       if (value == null)
         return res.status(400).json({
           error: `Missing '${key}' in request body`
-        })
-
+        });
     CommentsService.insertComment(
       req.app.get('db'),
       newComment
@@ -50,8 +49,6 @@ commentsRouter
           .status(201)
           .location(path.posix.join(req.originalUrl, `/${comment.id}`))
           .json(CommentsService.serializeComments(comment));
-
-         
       })
       .catch(next);
   });
