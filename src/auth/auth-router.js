@@ -1,3 +1,4 @@
+'use strict';
 const express = require('express');
 const authRouter = express.Router();
 const jsonBodyParser = express.json();
@@ -30,11 +31,13 @@ authRouter
                 error:'Incorrect username or password',
               });
             const sub =dbUser.username;
-            const payload = {user_id: dbUser.id};
+            const payload = {user_id: dbUser.id, userImg: dbUser.userImg};
             //The client can then use the JWT for every request to protected endpoints
             res.send({
               authToken:AuthService.createJwt(sub, payload),
-              user_id : dbUser.id
+              user_id : dbUser.id,
+              username: dbUser.username,
+              userImg: dbUser.userImg
             });
           });
       })
