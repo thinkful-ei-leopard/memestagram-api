@@ -8,13 +8,9 @@ const postsRouter = require('./posts/posts-router');
 const userRouter = require('./user/user-router');
 const authRouter = require('./auth/auth-router');
 const commentsRouter = require('./comment/comment-router');
-<<<<<<< HEAD
-const cloudinary = require('cloudinary');
-const formData = require('express-form-data');
-=======
+
 const cloudinary = require('cloudinary')
 const formData = require('express-form-data')
->>>>>>> 07c9b2ed0eaf7c3dad87f7d2e5ffcc0d8dbfb9c7
 const app = express ();
 
 
@@ -32,7 +28,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 
 
-app.post('/api/meme-upload', (req, res)=>{
+//app.post('/api/meme-upload', (req, res)=>{
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
@@ -41,6 +37,20 @@ cloudinary.config({
 });
   
 app.use(formData.parse());
+
+app.post('/api/meme-upload', (req, res)=>{
+  const values = Object.values(req.files);
+  const promises = values.map(image => cloudinary.uploader.upload(image.path));
+    
+  Promise
+    .all(promises)
+    // .then(res => res.json ())
+    .then(results => {
+      res.json(results);
+    });   
+});
+
+
   
 app.post('/api/image-upload', (req, res) => {
   
