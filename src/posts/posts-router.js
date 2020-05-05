@@ -41,16 +41,16 @@ postsRouter
       .catch(next);
   })
  
-  .post(requireAuth, jsonBodyParser, (req, res, next) => {
-    const {memeImg, description, likes=0}=req.body;
-    const newPost={memeImg, description, likes};
-       
+  .post(jsonBodyParser, (req, res, next) => {
+    const {description, memeImg, likes=0, user_id}=req.body;
+    const newPost={description, memeImg,  likes, user_id};
+   
     for(const [key, value] of Object.entries(newPost))
       if(value == null)
         return res.status(400).json({
           error:{ message: `Missing '${key}' in request body`}
         });
-    newPost.user_id= req.user.id;
+  
     PostsService.insertMyPost(
       req.app.get('db'),
       newPost
@@ -73,58 +73,60 @@ postsRouter
       likes
     )
       .then(numRowsAffected => {
-        res.status(204).end()
+        res.status(204).end();
       })
-      .catch(next)
+      .catch(next);
   })
 
-postsRouter
-  .route('/users/:user_id')
-  .get((req, res, next) => {
-    PostsService.getAllUserPosts(
-      req.app.get('db'),
-      req.params.user_id
-    )
-      .then(data =>{
-        if(!data){
-          return res.status(404).json({
-            error:{message:`Data doesn't exist`}
-          });
-        }
-        res.json(data.map(PostsService.serializePost));
-      })
-      .catch(next);
-  });
- 
-postsRouter
-  .route('/:post_id')
-  .get( (req, res, next)=>{ 
-    PostsService.getById(
-      req.app.get('db'),
-      req.params.post_id
-    ) 
-      .then(post =>{
-        if(!post){
-          return res.status(404).json({
-            error:{ message: `Post doesn't excist`}
-          });
-        }
-        res.json(serializePostandComments(post));
-        
-        next();
-      })
-      .catch(next);
-  })
-  
-  .delete(requireAuth, (req, res, next)=>{
+  .delete(requireAuth, jsonBodyParser, (req, res, next)=>{
     PostsService.deleteMyPost(
       req.app.get('db'),
-      req.params.posts.id
+      req.body.id
     )
       .then(data =>{
         res.status(204).end();
       })
       .catch(next);
+
+    postsRouter
+      .route('/users/:user_id')
+      .get((req, res, next) => {
+        PostsService.getAllUserPosts(
+          req.app.get('db'),
+          req.params.user_id
+        )
+          .then(data =>{
+            if(!data){
+              return res.status(404).json({
+                error:{message:`Data doesn't exist`}
+              });
+            }
+            res.json(data.map(PostsService.serializePost));
+          })
+          .catch(next);
+      });
+ 
+    postsRouter
+      .route('/:post_id')
+      .get( (req, res, next)=>{ 
+        PostsService.getById(
+          req.app.get('db'),
+          req.params.post_id
+        ) 
+          .then(post =>{
+            if(!post){
+              return res.status(404).json({
+                error:{ message: `Post doesn't excist`}
+              });
+            }
+            res.json(serializePostandComments(post));
+        
+            next();
+          })
+          .catch(next);
+      });
+  
+  
   });
 
 module.exports = postsRouter;

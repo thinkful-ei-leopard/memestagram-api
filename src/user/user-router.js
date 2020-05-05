@@ -7,9 +7,9 @@ const jsonBodyParser = express.json()
 
 userRouter 
     .post('/', jsonBodyParser, async (req, res, next) => {
-        const { password, username, name } = req.body
+        const { name, password, username, userImg } = req.body
 
-        for (const field of ['name', 'username', 'password'])
+        for (const field of ['name', 'username', 'password', 'userImg'])
         if (!req.body[field])
         return res.status(400).json({
             error: `Missing '${field}' in request body`
@@ -31,9 +31,10 @@ userRouter
                 const hashedPassword = await UserService.hashPassword(password)
 
                 const newUser = {
+                    name,
                     username, 
                     password: hashedPassword,
-                    name,
+                    userImg
                 }
 
                 const user = await UserService.insertUser(
@@ -49,5 +50,14 @@ userRouter
             next(error)
           }
     })
+    .post('/image-upload', (req, res) => {
+  
+        const values = Object.values(req.files);
+        const promises = values.map(image => cloudinary.uploader.upload(image.path));
+          
+        Promise
+          .all(promises)
+          .then(results => res.json(results));
+      });
 
     module.exports = userRouter
