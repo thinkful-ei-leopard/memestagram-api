@@ -44,7 +44,6 @@ app.post('/api/meme-upload', (req, res)=>{
     
   Promise
     .all(promises)
-    // .then(res => res.json ())
     .then(results => {
       res.json(results);
     });   
@@ -59,7 +58,6 @@ app.post('/api/image-upload', (req, res) => {
     
   Promise
     .all(promises)
-    // .then(res => res.json ())
     .then(results => {
       console.log(results);
       res.json(results);

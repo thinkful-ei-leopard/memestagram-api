@@ -25,7 +25,7 @@ const serializePostandComments = data =>({
 
 postsRouter
   .route('/')
-  .get( (req, res, next) => {
+  .get(requireAuth, (req, res, next) => {
     PostsService.getAllPosts(
       req.app.get('db')
       // req.user.id
@@ -41,7 +41,7 @@ postsRouter
       .catch(next);
   })
  
-  .post(jsonBodyParser, (req, res, next) => {
+  .post(requireAuth, jsonBodyParser, (req, res, next) => {
     const {description, memeImg, likes=0, user_id}=req.body;
     const newPost={description, memeImg,  likes, user_id};
    
@@ -64,7 +64,7 @@ postsRouter
       .catch(next);
   })
 
-  .patch(jsonBodyParser, (req, res, next) => {
+  .patch(requireAuth, jsonBodyParser, (req, res, next) => {
     const { id, likes } = req.body;
     
     PostsService.updateLikes(
@@ -90,7 +90,7 @@ postsRouter
   });
 postsRouter
   .route('/users/:user_id')
-  .get((req, res, next) => {
+  .get(requireAuth, (req, res, next) => {
     PostsService.getAllUserPosts(
       req.app.get('db'),
       req.params.user_id
@@ -108,7 +108,7 @@ postsRouter
  
 postsRouter
   .route('/:post_id')
-  .get( (req, res, next)=>{ 
+  .get(requireAuth, (req, res, next)=>{ 
     PostsService.getById(
       req.app.get('db'),
       req.params.post_id
