@@ -1,63 +1,54 @@
-const express = require('express')
-const path = require('path')
-const UserService = require('./user-service')
+const express = require('express');
+const path = require('path');
+const UserService = require('./user-service');
 
-userRouter = express.Router()
-const jsonBodyParser = express.json()
+const userRouter = express.Router();
+const jsonBodyParser = express.json();
 
 userRouter 
-    .post('/', jsonBodyParser, async (req, res, next) => {
-        const { name, password, username, userImg } = req.body
+  .post('/', jsonBodyParser, (req, res, next) => {
+    const { name, password, username, userImg } = req.body.user
 
-        for (const field of ['name', 'username', 'password', 'userImg'])
-        if (!req.body[field])
+    for (const field of ['name', 'username', 'password', 'userImg'])
+      if (!req.body.user[field])
         return res.status(400).json({
-            error: `Missing '${field}' in request body`
-        })
-
-        try {
-            const passwordError = UserService.validatePassword(password)
-
-            if (passwordError)
-            return res.status(400).json ({ error: passwordError })
-
-            const hasUserWithUserName = await UserService.hasUserWithUserName(
-                req.app.get('db'),
-                username
+          error: `Missing '${field}' in request body`
+        });
+    const passwordError = UserService.validatePassword(password);
+    if(passwordError)
+      return res.status(400).json({error: passwordError});
+    UserService.hasUserWithUserName(
+      req.app.get('db'),
+      username
+    )
+    
+      .then(hasUserWithUserName =>{
+        if(hasUserWithUserName)
+          return res.status(400).json({error: 'Username already taken'});
+            
+        return UserService.hashPassword(password)
+          .then(hashedPassword =>{
+            const newUser={
+              name,
+              username,
+              password: hashedPassword,
+              userImg
+              
+            };
+    
+            return UserService.insertUser(
+              req.app.get('db'),
+              newUser
             )
-            if (hasUserWithUserName)
-                return res.status(400).json({ error: `Username already take`})
-
-                const hashedPassword = await UserService.hashPassword(password)
-
-                const newUser = {
-                    name,
-                    username, 
-                    password: hashedPassword,
-                    userImg
-                }
-
-                const user = await UserService.insertUser(
-                    req.app.get('db'),
-                    newUser
-                )
-
+              .then(user =>{
                 res
-                    .status(201)
-                    .location(path.posix.join('req.originalURL', `/${user.id}`))
-                    .json(UserService.serializeUser(user))
-        } catch(error) {
-            next(error)
-          }
-    })
-    .post('/image-upload', (req, res) => {
-  
-        const values = Object.values(req.files);
-        const promises = values.map(image => cloudinary.uploader.upload(image.path));
-          
-        Promise
-          .all(promises)
-          .then(results => res.json(results));
-      });
+                  .status(201)
+                  .location(path.posix.join(req.originalUrl, `/${user.id}`))
+                  .json(UserService.serializeUser(user));
+              });
+          });
+      })
+      .catch(next);
+  });
 
-    module.exports = userRouter
+module.exports = userRouter;
