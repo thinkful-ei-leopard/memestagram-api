@@ -28,7 +28,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 
 
-//app.post('/api/meme-upload', (req, res)=>{
+
 
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
