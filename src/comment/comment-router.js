@@ -1,6 +1,6 @@
-const express = require('express')
-const path = require('path')
-const CommentsService = require('./comment-service')
+const express = require('express');
+const path = require('path');
+const CommentsService = require('./comment-service');
 const { requireAuth } = require('../middleware/jwt-auth');
 const commentsRouter = express.Router();
 const jsonBodyParser = express.json();
@@ -32,7 +32,9 @@ commentsRouter
       .catch(next);
   })
   .post(requireAuth, jsonBodyParser, (req, res, next) => {
-    const {comment,user_id, posts_id}=req.body;
+    console.log(req.body.comment)
+    console.log(req.body)
+    const {comment, user_id, posts_id}=req.body;
     const newComment ={comment, user_id, posts_id};
     for (const [key, value] of Object.entries(newComment))
       if (value == null)
