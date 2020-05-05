@@ -73,10 +73,10 @@ postsRouter
       likes
     )
       .then(numRowsAffected => {
-        res.status(204).end()
+        res.status(204).end();
       })
-      .catch(next)
-  });
+      .catch(next);
+  })
 
   .delete(requireAuth, jsonBodyParser, (req, res, next)=>{
     PostsService.deleteMyPost(
