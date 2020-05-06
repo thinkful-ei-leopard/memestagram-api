@@ -1,4 +1,4 @@
-app.post('/me', bodyParser.json(), stormpath.loginRequired, function (req, res) {
+app.post('/user-setting', bodyParser.json(), stormpath.loginRequired, function (req, res) {
     function writeError(message) {
       res.status(400);
       res.json({ message: message, status: 400 });

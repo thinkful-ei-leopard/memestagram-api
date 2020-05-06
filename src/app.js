@@ -12,6 +12,7 @@ const commentsRouter = require('./comment/comment-router');
 const cloudinary = require('cloudinary')
 const formData = require('express-form-data')
 const app = express ();
+const bodyParser = require('body-parser')
 
 
 const morganOption = (NODE_ENV === 'production')
@@ -21,13 +22,12 @@ const morganOption = (NODE_ENV === 'production')
 app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
+app.use(bodyParser.json())
 
 app.use('/api/comments', commentsRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
-
-
 
 
 cloudinary.config({ 
@@ -62,6 +62,44 @@ app.post('/api/image-upload', (req, res) => {
       console.log(results);
       res.json(results);
     });
+});
+
+app.post('/user-setting',  function (req, res) {
+  function writeError(message) {
+    res.status(400);
+    res.json({ message: message, status: 400 });
+    res.end();
+  }
+
+  function saveAccount() {
+    req.user.name = req.body.name;
+
+    req.user.save(function (err) {
+      if (err) {
+        return writeError(err.userMessage || err.message);
+      }
+      res.end();
+    });
+  }
+
+  if (req.body.password) {
+    var application = req.app.get('stormpathApplication');
+
+    application.authenticateAccount({
+      username: req.user.username,
+      password: req.body.existingPassword
+    }, function (err) {
+      if (err) {
+        return writeError('The existing password that you entered was incorrect.');
+      }
+
+      req.user.password = req.body.password();
+
+      saveAccount();
+    });
+  } else {
+    saveAccount();
+  }
 });
 
 
