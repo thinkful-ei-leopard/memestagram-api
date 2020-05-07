@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const xss = require('xss');
 
 const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
 
@@ -37,8 +38,7 @@ const UserService = {
   serializeUser(user) {
     return {
       id: user.id,
-      name: user.name,
-      username: user.username,
+      username: xss(user.username),
       userImg: user.userImg
     };
   },
