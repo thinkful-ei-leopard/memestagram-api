@@ -299,8 +299,8 @@ Memes are one of the greatest symbols of social media.
 They’re edgy. They’re funny. They’re easy to iterate on, and every week, a new one pops up.
 But despite their popularity, it seems like there is no place for us to share or collect them. Memestagram is here for you! It’s a meme only platform. Whether you want to share the meme that you create or look for some interesting memes. Just join us!
 
+### Features
 
- Features:
 -set up the user's own account with their profile image
 
 -calculate the total likes and comments for each post
@@ -315,7 +315,15 @@ But despite their popularity, it seems like there is no place for us to share or
 
 -allow users to delete their posts
 
+### Authors
 
- Technology used -
+| Name | Role | Github Profile |
+| :-------------: |:-------------:|:-------------:|
+| Lillian Burnside | Project Manager | [link](https://github.com/LilyBurnside) |
+| Cesar Hernandez | Product Manager | [link](https://github.com/Poden) |
+| Hsin Ling Hu | UI/UX Lead | [link](https://github.com/hsinlinghu1101) |
+| Christian Shim | QA Lead | [link](https://github.com/shimmy77) |
+
+ ### Technology used 
  
  React, CSS, Node, Express, and PostgreSQL.
