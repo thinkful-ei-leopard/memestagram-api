@@ -1,26 +1,329 @@
-# Express Boilerplate!
+# Memestagram
 
-This is a boilerplate project used for starting new projects!
+### Link to live app: https://memestagram.now.sh/
 
-## Set up
+### Link to heroku server: https://pacific-beach-23085.herokuapp.com/api
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+## API Documentation
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+### POST/api/auth/login
 
-## Scripts
+Login user account. Requires a request body
 
-Start the application `npm start`
+ POST https://pacific-beach-23085.herokuapp.com/api/auth/login
+ 
+  REQ BODY: { "name": "Demo_user", "username": "Demo", "Password": "Demopass123!" }
 
-Start nodemon for the application `npm run dev`
+  HTTP STATUS 201 Created
+  
+  Location: https://pacific-beach-23085.herokuapp.com/api/auth/login
+  
+  {
+    
+    "id": "1",
+    
+    "user_name": "Demo",
+    
+    "Password": "Demopass123!"
+    
+  }
+  
+### POST/api/user
 
-Run the tests `npm test`
+Create a new user account. Requires a request body.
 
-## Deploying
+ POST https://pacific-beach-23085.herokuapp.com/api/user
+ 
+  REQ BODY: { "user_name": "Demo", "user_age": "1" , "password":"Demopass123!"}
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+  HTTP STATUS 201 Created
+  
+  Location: https://pacific-beach-23085.herokuapp.com/api/users
+  
+  { 
+  
+    "id":"1",
+
+    "userImg": "https://i.insider.com/5c59e77ceb3ce80d46564023?width=600&format=jpeg&auto=webp",
+
+    "name": "Demo_user",
+    
+    "username": "Demo",
+    
+    "password":"Demopass123!"
+    
+  }
+  
+### GET/api/posts
+
+Provides array of posts object of all users.
+
+GET https://pacific-beach-23085.herokuapp.com/api/posts
+
+  HTTP STATUS 200 OK
+  
+  [{
+  
+    "id":"1",
+    
+    "memeImg":"https://live.staticflickr.com/5611/15033991623_66352974b6_z.jpg",
+    
+    "description":"When you know you messed up...",
+    
+    "likes":"0",
+    
+    "user_id":"1",
+    
+  },
+  
+    {
+    
+    "id":"2",
+      
+    "memeImg":"https://live.boy.com/5611/15033991623_66352974b6_z.jpg",
+    
+    "description":"My son is so funny",
+    
+    "likes":"0",
+    
+    "user_id":"2",
+    
+    }
+    
+  ]
+
+### POST/api/posts
+
+Create a new posts. Requires a request body.
+
+POST https://pacific-beach-23085.herokuapp.com/api/posts
+
+  REQ BODY: { 
+  
+    "memeImg":"https://live.boy.com/5611/15033991623_66352974b6_z.jpg",
+    
+    "description":"My son is so funny",
+    
+    "likes":"0",
+    
+    "user_id":"2",
+  
+   }
+
+  HTTP STATUS 201 Created
+  
+  Location: https://pacific-beach-23085.herokuapp.com/api/posts
+  
+  {
+  
+    "memeImg":"https://live.boy.com/5611/15033991623_66352974b6_z.jpg",
+    
+    "description":"My son is so funny",
+    
+    "likes":"0",
+    
+    "user_id":"2",
+    
+  }
+
+### PATCH/api/posts
+
+Calculate the number of likes. Requires a request body.
+
+PATCH https://pacific-beach-23085.herokuapp.com/api/posts
+
+REQ BODY: { 
+    
+    "likes":"0",
+    
+    "posts_id":"1",
+  
+   }
+
+  HTTP STATUS 204 No Content 
+  
+  Location: https://pacific-beach-23085.herokuapp.com/api/posts
+
+### DELETE/api/posts
+
+Deletes data matching id parameter from the posts.
+
+Example request/response:
+
+  DELETE https://pacific-beach-23085.herokuapp.com/api/posts
+    
+  HTTP STATUS 204 No Content
+  
+  {} (empty)
+
+### GET/api/posts/users/:user_id
+
+Get specific user's posts by matching id parameter from the users.
+
+GET https://pacific-beach-23085.herokuapp.com/api/posts/users/:user_id
+
+  HTTP STATUS 200 OK
+  
+  [{
+  
+    "id":"1",
+    
+    "memeImg":"https://live.staticflickr.com/5611/15033991623_66352974b6_z.jpg",
+    
+    "description":"When you know you messed up...",
+    
+    "likes":"0",
+    
+    "user_id":"1",
+    
+  },
+
+  {
+  
+    "id":"2",
+    
+    "memeImg":"https://live.staticflickr.com/5611/15033991623_66352974b6_z.jpg",
+    
+    "description":"When you want to sleep...",
+    
+    "likes":"0",
+    
+    "user_id":"1",
+    
+  }]
+
+### GET/api/posts/:post_id
+
+Get specific post by matching id parameter from the posts.
+
+GET https://pacific-beach-23085.herokuapp.com/api/posts/:post_id
+
+  HTTP STATUS 200 OK
+  
+  [{
+  
+    "id":"1",
+    
+    "memeImg":"https://live.staticflickr.com/5611/15033991623_66352974b6_z.jpg",
+    
+    "description":"When you know you messed up...",
+    
+    "likes":"0",
+    
+    "user_id":"1",
+    
+  }]
+
+### GET/api/comments/:post_id
+
+Get specific post's comments by matching id parameter from the posts.
+
+GET https://pacific-beach-23085.herokuapp.com/api/comments/:post_id
+
+  HTTP STATUS 200 OK
+  
+  [{
+  
+    "id":"1",
+    
+    "comment":"I love it",
+    
+    "posts_id":"1",
+    
+    "user_id":"1",
+    
+  },
+  {
+  
+    "id":"2",
+    
+    "comment":"It's amazing",
+    
+    "posts_id":"1",
+    
+    "user_id":"3",
+    
+  }
+  ]
+
+
+### POST/api/comments/:post_id
+
+Post a comment on the post that match the id parameter from the posts.
+
+REQ BODY: { 
+  
+   "comment":"I love it",
+    
+    "posts_id":"1",
+    
+    "user_id":"1",
+  
+   }
+
+  HTTP STATUS 201 Created
+  
+  Location: https://pacific-beach-23085.herokuapp.com/api/posts/:post_id
+  
+  {
+  
+     "id":"1",
+    
+    "comment":"I love it",
+    
+    "posts_id":"1",
+    
+    "user_id":"1"
+    
+  }
+
+## How to use the Memestagram
+
+If you are a new user, please register an account.
+
+If you already have an account please log in
+
+After you log in you can see others' posts
+
+Click the user's name for see more posts from the user
+
+Click commnets button or meme image to to add or see comments
+
+Click the "AddPost" to add a new posts
+
+Click your profile image to see all of your posts
+
+### What is Memestagram
+
+Memes are one of the greatest symbols of social media.
+They’re edgy. They’re funny. They’re easy to iterate on, and every week, a new one pops up.
+But despite their popularity, it seems like there is no place for us to share or collect them. Memestagram is here for you! It’s a meme only platform. Whether you want to share the meme that you create or look for some interesting memes. Just join us!
+
+### Features
+
+-set up the user's own account with their profile image
+
+-calculate the total likes and comments for each post
+
+-click on user name to see all posts from that user
+
+-click on the posts image or comment button to see the comments and add comment
+
+-allow for users to add a comment or click like on others' posts
+
+-keep users' posts in their account
+
+-allow users to delete their posts
+
+### Authors
+
+| Name | Role | Github Profile |
+| :-------------: |:-------------:|:-------------:|
+| Lillian Burnside | Project Manager | [link](https://github.com/LilyBurnside) |
+| Cesar Hernandez | Product Manager | [link](https://github.com/Poden) |
+| Hsin Ling Hu | UI/UX Lead | [link](https://github.com/hsinlinghu1101) |
+| Christian Shim | QA Lead | [link](https://github.com/shimmy77) |
+
+ ### Technology used 
+ 
+ React, CSS, Node, Express, and PostgreSQL.
