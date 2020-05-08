@@ -1,12 +1,12 @@
-Memestagram
+# Memestagram
 
-Link to live app: https://memestagram.now.sh/
+### Link to live app: https://memestagram.now.sh/
 
-Link to heroku server: https://pacific-beach-23085.herokuapp.com/api
+### Link to heroku server: https://pacific-beach-23085.herokuapp.com/api
 
-Documentation of your API.
+## API Documentation
 
-POST/api/auth/login
+### POST/api/auth/login
 
 Login user account. Requires a request body
 
@@ -28,7 +28,7 @@ Login user account. Requires a request body
     
   }
   
-POST/api/user
+### POST/api/user
 
 Create a new user account. Requires a request body.
 
@@ -54,7 +54,7 @@ Create a new user account. Requires a request body.
     
   }
   
-GET/api/posts
+### GET/api/posts
 
 Provides array of posts object of all users.
 
@@ -92,7 +92,7 @@ GET https://pacific-beach-23085.herokuapp.com/api/posts
     
   ]
 
-POST/api/posts
+### POST/api/posts
 
 Create a new posts. Requires a request body.
 
@@ -126,7 +126,7 @@ POST https://pacific-beach-23085.herokuapp.com/api/posts
     
   }
 
-PATCH/api/posts
+### PATCH/api/posts
 
 Calculate the number of likes. Requires a request body.
 
@@ -144,7 +144,7 @@ REQ BODY: {
   
   Location: https://pacific-beach-23085.herokuapp.com/api/posts
 
-DELETE/api/posts
+### DELETE/api/posts
 
 Deletes data matching id parameter from the posts.
 
@@ -156,7 +156,7 @@ Example request/response:
   
   {} (empty)
 
-GET/api/posts/users/:user_id
+### GET/api/posts/users/:user_id
 
 Get specific user's posts by matching id parameter from the users.
 
@@ -192,7 +192,7 @@ GET https://pacific-beach-23085.herokuapp.com/api/posts/users/:user_id
     
   }]
 
-GET/api/posts/:post_id
+### GET/api/posts/:post_id
 
 Get specific post by matching id parameter from the posts.
 
@@ -214,7 +214,7 @@ GET https://pacific-beach-23085.herokuapp.com/api/posts/:post_id
     
   }]
 
-GET/api/comments/:post_id
+### GET/api/comments/:post_id
 
 Get specific post's comments by matching id parameter from the posts.
 
@@ -247,7 +247,7 @@ GET https://pacific-beach-23085.herokuapp.com/api/comments/:post_id
   ]
 
 
-POST/api/comments/:post_id
+### POST/api/comments/:post_id
 
 Post a comment on the post that match the id parameter from the posts.
 
@@ -277,7 +277,7 @@ REQ BODY: {
     
   }
 
-How to use the App -
+## How to use the Memestagram
 
 If you are a new user, please register an account.
 
@@ -293,7 +293,7 @@ Click the "AddPost" to add a new posts
 
 Click your profile image to see all of your posts
 
-A summary section-
+### What is Memestagram
 
 Memes are one of the greatest symbols of social media.
 They’re edgy. They’re funny. They’re easy to iterate on, and every week, a new one pops up.
