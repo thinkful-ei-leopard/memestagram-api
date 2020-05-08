@@ -297,7 +297,7 @@ A summary section-
 
 Memes are one of the greatest symbols of social media.
 They’re edgy. They’re funny. They’re easy to iterate on, and every week, a new one pops up.
-But despite their popularity, it seems like there is no place for us to share or collect them. Memestagram is here for you! It’s an only meme platform. Wheater you want to share the meme that you create or look for some interesting meme. Just join us!
+But despite their popularity, it seems like there is no place for us to share or collect them. Memestagram is here for you! It’s a meme only platform. Whether you want to share the meme that you create or look for some interesting memes. Just join us!
 
 
  Features:
