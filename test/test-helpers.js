@@ -1,3 +1,4 @@
+
 const knex = require('knex')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
@@ -148,4 +149,3 @@ function seedUsers(db, users) {
     seedPost,
     seedUsers,
     seedComment
-  }
