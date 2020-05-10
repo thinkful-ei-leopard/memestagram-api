@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs')
 const app = require('../src/app')
+const helpers = require('./test-helpers')
 
 describe('User Endpoints', function () {
     let db
@@ -21,8 +22,8 @@ describe('User Endpoints', function () {
     /**
      * @description Register a user and populate their fields
      **/
-    describe(`POST /api/user`, () => {
-      beforeEach('insert users', () => helpers.seedUsers(db, testUsers))
+    describe(`POST /api/users`, () => {
+      beforeEach('insert user', () => helpers.seedUsers(db, testUsers))
   
       const requiredFields = ['username', 'password', 'name']
   
@@ -163,3 +164,7 @@ describe('User Endpoints', function () {
                 })
             )
         })
+      })
+    })
+  })
+
