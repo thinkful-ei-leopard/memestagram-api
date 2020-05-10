@@ -1,4 +1,5 @@
-'use strict';
+
+//To prevent cross-site-scripting
 const xss = require('xss');
 
 const PostsService={

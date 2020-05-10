@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const cloudinary = require('cloudinary')
 const formData = require('express-form-data')
-const cors = require('cors')
+const cors = require('cors');
 const app = require('./app');
 const knex = require('knex');
 const { PORT, DATABASE_URL } = require('./config');

@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const xss = require('xss');
 
+//The pattern makes 4 checks, for a lower case, an upper case, a number and 1 of the specified "special" characters. 
 const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
 
 const UserService = {

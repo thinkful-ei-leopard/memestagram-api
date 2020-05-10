@@ -14,6 +14,8 @@ const serializeGetComment = comment =>({
   user_id: comment.user_id  
 });
 
+//Get-Display the comments base on the post_id that user-selected
+//Post- create a cooment to the post_id that user-selected
 commentsRouter
   .route('/:post_id')
   .get(requireAuth, (req, res, next)=>{
@@ -24,7 +26,7 @@ commentsRouter
       .then(data =>{
         if(!data){
           return res.status(404).json({
-            error:{message:`comments doesn't exist`}
+            error:{message:'comments does not exist'}
           });
         }
         res.json(data.map(serializeGetComment));
@@ -32,8 +34,6 @@ commentsRouter
       .catch(next);
   })
   .post(requireAuth, jsonBodyParser, (req, res, next) => {
-    console.log(req.body.comment)
-    console.log(req.body)
     const {comment, user_id, posts_id}=req.body;
     const newComment ={comment, user_id, posts_id};
     for (const [key, value] of Object.entries(newComment))
