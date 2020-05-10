@@ -149,3 +149,4 @@ function seedUsers(db, users) {
     seedPost,
     seedUsers,
     seedComment
+  }

@@ -1,4 +1,4 @@
-const app = require('../src/app')
+/*const app = require('../src/app')
 const helpers =require('./test-helpers')
 
 describe ('Comment Endpoints', function () {
@@ -6,7 +6,7 @@ describe ('Comment Endpoints', function () {
 
     const testUsers = helpers.makeUsersArray()
     const [testUser] = testUsers
-    const [testComment] = helpers.makeCommentArray()
+    const [testComment] = helpers.makeCommentsArray()
 
     before ('make knex instance', () => {
         db = helpers.makeKnexInstance()
@@ -61,4 +61,4 @@ describe ('Comment Endpoints', function () {
         })
     
     })
-})
+})*/
