@@ -28,28 +28,28 @@ VALUES
       1, 
       'https://live.staticflickr.com/5611/15033991623_66352974b6_z.jpg', 
       'When you know you messed up...', 
-      0, 
+      1, 
       1
     ),
     (
       2,
-      'https://live.staticflickr.com/5611/15033991623_66352974b6_z.jpg', 
-      'When you know you messed up...', 
-      0, 
+      'https://res.cloudinary.com/dpb0e7nm7/image/upload/v1588777962/hr81n3lcxnpfcxakaa5z.jpg', 
+      'When u find a bug', 
+      5, 
       1
     ),
     (
       3,
-      'https://live.staticflickr.com/5611/15033991623_66352974b6_z.jpg', 
-      'When you know you messed up...', 
-      0, 
+      'https://res.cloudinary.com/dpb0e7nm7/image/upload/v1588777796/a5kgcvzcg4synidwbnx8.jpg', 
+      '4 Fiona', 
+      6, 
       1
     ),
     (
       4,
-      'https://live.staticflickr.com/5611/15033991623_66352974b6_z.jpg', 
-      'When you know you messed up...', 
-      0, 
+      'https://res.cloudinary.com/dpb0e7nm7/image/upload/v1588708061/qaead1zfkzcfvdvg4bjf.png', 
+      'Only Texans understand', 
+      10, 
       1
     );
 
