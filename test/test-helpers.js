@@ -91,7 +91,7 @@ function makeDataFixtures(){
 
 
 function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
-    const token = jwt.sign({ user_id: user.id }, secret, {
+    const token = jwt.sign({ user_id: user.id, userImg: user.userImg }, secret, {
       subject: user.username,
       algorithm: 'HS256',
     })
