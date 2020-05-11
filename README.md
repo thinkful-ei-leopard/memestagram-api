@@ -281,17 +281,38 @@ REQ BODY: {
 
 If you are a new user, please register an account.
 
+![1](https://user-images.githubusercontent.com/47201201/81482880-05e00480-91ef-11ea-8c3d-0c5104fb75e0.png)
+
 If you already have an account please log in
 
-After you log in you can see others' posts
+![2](https://user-images.githubusercontent.com/47201201/81482894-14c6b700-91ef-11ea-927f-2a7d5bb6380e.png)
 
-Click the user's name for see more posts from the user
+After logging in you can see other users' posts
 
-Click commnets button or meme image to to add or see comments
+Click on the trash can to delete your post
 
-Click the "AddPost" to add a new posts
+Click a heart to add likes to that post
+
+![3](https://user-images.githubusercontent.com/47201201/81482901-21e3a600-91ef-11ea-9c98-d7bb8351f15f.png)
+
+Click on a username to see more memes from the user
+
+![4](https://user-images.githubusercontent.com/47201201/81482920-40e23800-91ef-11ea-8b39-a52f6376045d.png)
+
+Click on commnet or image to to add and see comments
+
+![5](https://user-images.githubusercontent.com/47201201/81482942-55263500-91ef-11ea-8a9d-e917b6e4ba71.png)
+
+
+Click on "AddPost" to create a new posts
+
+![6](https://user-images.githubusercontent.com/47201201/81482954-6c652280-91ef-11ea-846d-e26fdfbe6179.png)
+
 
 Click your profile image to see all of your posts
+
+![7](https://user-images.githubusercontent.com/47201201/81483076-4724e400-91f0-11ea-8dee-f4bc50cbff5e.png)
+
 
 ### What is Memestagram
 
