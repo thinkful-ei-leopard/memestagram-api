@@ -124,8 +124,8 @@ function seedComment(db, comments) {
     await trx.into('comment').insert(newComment)
   })
 }
-function seedUsers(db, user) {
-    const preppedUsers = user.map(user => ({
+function seedUsers(db, users) {
+    const preppedUsers = users.map(user => ({
       ...user,
       password: bcrypt.hashSync(user.password, 1)
     }))
