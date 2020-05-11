@@ -1,5 +1,5 @@
 
-/*const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
@@ -23,7 +23,7 @@ describe('User Endpoints', function () {
   /**
      * @description Register a user and populate their fields
      **/
-    /*
+    
   describe(`POST /api/users`, () => {
     beforeEach('insert user', () => helpers.seedUsers(db, testUsers));
   
@@ -141,7 +141,7 @@ describe('User Endpoints', function () {
           });
       });
   
-      it(`stores the new user in db with bcryped password`, () => {
+      it(`stores the new user in db with bcrypted password`, () => {
         const newUser = {
           username: 'test username',
           password: '11AAaa!!',
@@ -169,4 +169,4 @@ describe('User Endpoints', function () {
       });
     });
   });
-});*/
+});
