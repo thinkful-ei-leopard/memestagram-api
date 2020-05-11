@@ -1,5 +1,5 @@
 
-/*const app = require('../src/app')
+const app = require('../src/app')
 const helpers = require('./test-helpers')
 
 describe ('Post Endpoints', function () {
@@ -64,5 +64,4 @@ it(`responds with 200 and user's posts`, () => {
       expect (res.body.post).to.have.property('userImg', userPost.userimg)
     })
 
-})*/
-
+})
