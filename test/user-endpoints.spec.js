@@ -1,13 +1,14 @@
 
-/*const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
 describe('User Endpoints', function () {
   let db;
   
-  const testUsers = helpers.makeDataFixtures();
+  const testUsers = helpers.makeUsersArray();
   const testUser = testUsers[0];
+  console.log(testUsers)
   
   before('make knex instance', () => {
     db = helpers.makeKnexInstance();
@@ -23,20 +24,19 @@ describe('User Endpoints', function () {
   /**
      * @description Register a user and populate their fields
      **/
-    /*
+    
   describe(`POST /api/users`, () => {
     beforeEach('insert user', () => helpers.seedUsers(db, testUsers));
   
-    const requiredFields = ['username', 'password', 'name', 'userImg'];
+    const requiredFields = ['username', 'name', 'password', 'userImg'];
   
     requiredFields.forEach(field => {
-      const registerAttemptBody = {
+      let registerAttemptBody = {
         username: 'test-user-1',
+        name: 'test user 1',
         password: 'Password123!',
-        name: 'test-name',
         userImg: 'http://userImg.com'
-      };
-  
+    };
       it(`responds with 400 required error when '${field}' is missing`, () => {
         delete registerAttemptBody[field];
   
@@ -49,28 +49,31 @@ describe('User Endpoints', function () {
       });
     });
 
-    it(`responds 400 'Password be longer than 6 characters' when empty password`, () => {
+    it(`responds 400 'Password must be longer than 6 characters' when empty password`, () => {
       const userShortPassword = {
+        name: 'test name',
         username: 'test username',
         password: '12345',
-        name: 'test name',
+        userImg: 'http://userImg.com'
+        
       };
       return supertest(app)
         .post('/api/users')
         .send(userShortPassword)
-        .expect(400, { error: `Password be longer than 6 characters` });
+        .expect(400, { error: `Password must be longer than 6 characters` })
     });
   
-    it(`responds 400 'Password be less than 30 characters' when long password`, () => {
+    it(`responds 400 'Password must be less than 30 characters' when long password`, () => {
       const userLongPassword = {
         username: 'test username',
         password: '*'.repeat(31),
         name: 'test name',
+        userImg: 'http://userImg.com'
       };
       return supertest(app)
         .post('/api/users')
         .send(userLongPassword)
-        .expect(400, { error: `Password be less than 30 characters` });
+        .expect(400, { error: `Password must be less than 30 characters` });
     });
   
     it(`responds 400 error when password starts with spaces`, () => {
@@ -78,6 +81,7 @@ describe('User Endpoints', function () {
         username: 'test username',
         password: ' 1Aa!2Bb@',
         name: 'test name',
+        userImg: 'http://userImg.com'
       };
       return supertest(app)
         .post('/api/users')
@@ -90,6 +94,7 @@ describe('User Endpoints', function () {
         username: 'test username',
         password: '1Aa!2Bb@ ',
         name: 'test name',
+        userImg: 'http://userImg.com'
       };
       return supertest(app)
         .post('/api/users')
@@ -102,6 +107,7 @@ describe('User Endpoints', function () {
         username: 'test username',
         password: '11AAaabb',
         name: 'test name',
+        userImg: 'http://userImg.com'
       };
       return supertest(app)
         .post('/api/users')
@@ -114,34 +120,15 @@ describe('User Endpoints', function () {
         username: testUser.username,
         password: '11AAaa!!',
         name: 'test name',
+        userImg: 'http://userImg.com'
       };
       return supertest(app)
         .post('/api/users')
         .send(duplicateUser)
         .expect(400, { error: `Username already taken` });
     });
-  
-    describe(`Given a valid user`, () => {
-      it(`responds 201, serialized user with no password`, () => {
-        const newUser = {
-          username: 'test username',
-          password: '11AAaa!!',
-          name: 'test name',
-        };
-        return supertest(app)
-          .post('/api/users')
-          .send(newUser)
-          .expect(201)
-          .expect(res => {
-            expect(res.body).to.have.property('id');
-            expect(res.body.username).to.eql(newUser.username);
-            expect(res.body.name).to.eql(newUser.name);
-            expect(res.body).to.not.have.property('password');
-            expect(res.headers.location).to.eql(`/api/users/${res.body.id}`);
-          });
-      });
-  
-      it(`stores the new user in db with bcryped password`, () => {
+    
+      it(`stores the new user in db with bcrypted password`, () => {
         const newUser = {
           username: 'test username',
           password: '11AAaa!!',
@@ -169,4 +156,3 @@ describe('User Endpoints', function () {
       });
     });
   });
-});*/
