@@ -2,6 +2,7 @@
 const knex = require('knex')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+
 function makeKnexInstance() {
   return knex({
     client: 'pg',
@@ -13,15 +14,15 @@ function makeUsersArray() {
     {
       id: 1,
       username: 'test-user-1',
-      name: 'Test user 1',
-      password: 'password',
+      name: 'Testuser1',
+      password: 'Pass123!',
       userImg : 'http://userImg1.com'
     },
     {
       id: 2,
       username: 'test-user-2',
-      name: 'Test user 2',
-      password: 'password',
+      name: 'Testuser2',
+      password: 'Password123!',
       userImg : 'http://userImg2.com'
     },
   ]
@@ -45,7 +46,7 @@ function makePostsArray() {
   ]
 }
 
-function makeCommentsArray(users, posts) {
+function makeCommentsArray() {
   return [
     {
       id: 1,
@@ -81,10 +82,10 @@ function makeExpectedCommets(comments=[]){
     }
 }
 
-function makePostsFixtures(){
+function makeDataFixtures(){
     const testUsers = makeUsersArray()
-    const testPosts = makePostsArray(testUsers)
-    const testComments = makeCommentsArray(testUsers, testPosts)
+    const testPosts = makePostsArray()
+    const testComments = makeCommentsArray()
     return {testUsers, testPosts, testComments }
 }
 
@@ -99,13 +100,13 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
 
 function cleanTables(db) {
     return db.raw(      
-        `TRUNCATE
-            user,
-            posts,
-            comments
-            RESTART IDENTITY CASCADE`
+        `TRUNCATE  
+        "user",
+        posts,
+        comments
+          RESTART IDENTITY CASCADE`
+
     )
-    
 }
 function seedPost(db, posts) {
     const newPosts = posts.map(post => ({
@@ -115,25 +116,25 @@ function seedPost(db, posts) {
       await trx.into('post').insert(newPosts)
     })
 }
-function seedComment(db, comment) {
-  const newComment = comment.map(comment => ({
+function seedComment(db, comments) {
+  const newComment = comments.map(comment => ({
     ...comment,
   }))
   return db.transaction(async trx => {
     await trx.into('comment').insert(newComment)
   })
 }
-function seedUsers(db, users) {
-    const preppedUsers = users.map(user => ({
+function seedUsers(db, user) {
+    const preppedUsers = user.map(user => ({
       ...user,
       password: bcrypt.hashSync(user.password, 1)
     }))
     return db.transaction(async trx => {
       await trx.into('user').insert(preppedUsers)
-      await trx.raw(
-        `SELECT setval('user_id_seq', ?)`,
-        [users[users.length - 1].id],
-      )
+    //  await trx.raw(
+    //    `SELECT setval('user_id_seq', ?)`,
+    //    [users[users.length - 1].id],
+     // )
     })
   }
   module.exports = {
@@ -144,7 +145,7 @@ function seedUsers(db, users) {
     makeCommentsArray,
     makeExpectedPost,
     makeExpectedCommets,
-    makePostsFixtures,
+    makeDataFixtures,
     cleanTables,
     seedPost,
     seedUsers,

@@ -1,12 +1,12 @@
 
-const bcrypt = require('bcryptjs');
+/*const bcrypt = require('bcryptjs');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
 describe('User Endpoints', function () {
   let db;
   
-  const testUsers = helpers.makeUsersArray();
+  const testUsers = helpers.makeDataFixtures();
   const testUser = testUsers[0];
   
   before('make knex instance', () => {
@@ -23,16 +23,18 @@ describe('User Endpoints', function () {
   /**
      * @description Register a user and populate their fields
      **/
+    /*
   describe(`POST /api/users`, () => {
     beforeEach('insert user', () => helpers.seedUsers(db, testUsers));
   
-    const requiredFields = ['username', 'password', 'name'];
+    const requiredFields = ['username', 'password', 'name', 'userImg'];
   
     requiredFields.forEach(field => {
       const registerAttemptBody = {
-        username: 'test username',
-        password: 'test password',
-        name: 'test name',
+        username: 'test-user-1',
+        password: 'Password123!',
+        name: 'test-name',
+        userImg: 'http://userImg.com'
       };
   
       it(`responds with 400 required error when '${field}' is missing`, () => {
@@ -167,4 +169,4 @@ describe('User Endpoints', function () {
       });
     });
   });
-});
+});*/

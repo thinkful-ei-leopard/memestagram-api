@@ -5,7 +5,7 @@ const helpers = require('./test-helpers');
 describe('Auth Endpoints', function(){
   let db;
 
-  const { testUsers } = helpers.makePostsFixtures();
+  const { testUsers } = helpers.makeDataFixtures();
   const testUser = testUsers[0];
 
   before('make knex instance', () =>{
@@ -25,11 +25,11 @@ describe('Auth Endpoints', function(){
         testUsers
       )
     );
-    const requireFields = ['user_name', 'password'];
+    const requireFields = ['username', 'password'];
 
     requireFields.forEach(field =>{
       const loginAttemptBody ={
-        user_name:testUser.user_name,
+        username:testUser.username,
         password:testUser.password
       };
 
@@ -45,28 +45,28 @@ describe('Auth Endpoints', function(){
       });
 
     });
-    it(`'responds 400 'invalid user_name or password' when bad user_name'`,()=> {
+    it(`'responds 400 'invalid username or password' when bad username'`,()=> {
       const userInvalidUser ={ username:'user-not', password:'existy'};
       return supertest(app)
         .post('/api/auth/login')
         .send(userInvalidUser)
         .expect(400, {
-          error:'Incorrect user_name or password'
+          error:'Incorrect username or password'
         });
     });
-    it(`responds 400 'invalid user_name or password' when bad user_name`,()=> {
-      const userInvalidUser ={ username:'testUser.user_name', password:'incorrect'};
+    it(`responds 400 'invalid username or password' when bad username`,()=> {
+      const userInvalidUser ={ username:'testUser.username', password:'incorrect'};
       return supertest(app)
         .post('/api/auth/login')
         .send(userInvalidUser)
         .expect(400, {
-          error:'Incorrect user_name or password'
+          error:'Incorrect username or password'
         });
     });
     it(`responds 200 and JWT auth token using secret when valid credentials`, ()=>{
       
       const userValidCreds={
-        username: testUser.user_name,
+        username: testUser.username,
         password: testUser.password
       };
 
@@ -74,7 +74,7 @@ describe('Auth Endpoints', function(){
         { user_id: testUser.id},
         process.env.JWT_SECRET,
         {
-          subject:testUser.user_name,
+          subject:testUser.username,
           algorithm:'HS256'
         }
       );
@@ -83,7 +83,9 @@ describe('Auth Endpoints', function(){
         .send(userValidCreds)
         .expect(200, {
           authToken:expectedToken,
-          user_id:testUser.id
+          user_id:testUser.id,
+          username:testUser.username,
+          userImg:testUser.userImg
         });
     });
     
