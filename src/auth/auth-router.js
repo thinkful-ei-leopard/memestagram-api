@@ -1,4 +1,4 @@
-'use strict';
+
 const express = require('express');
 const authRouter = express.Router();
 const jsonBodyParser = express.json();
@@ -39,6 +39,7 @@ authRouter
               username: dbUser.username,
               userImg: dbUser.userImg
             });
+            
           });
       })
       .catch(next);
