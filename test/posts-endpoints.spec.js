@@ -36,6 +36,16 @@ describe ('Post Endpoints', function () {
       user_id: 1
     };
 
+    const expectedPost = [
+    {
+      id: 1,
+      memeImg: 'http://memeImg.com',
+      description: 'test-description',
+      likes: '2',
+      user_id: 3,
+      username: 'test-user-1'
+    }
+  ]
     beforeEach('insert users and posts', () => {
       return db 
         .into('user')
@@ -46,6 +56,13 @@ describe ('Post Endpoints', function () {
             .insert(testPost);
         })
     });
+    it('responds with a 200 and all the posts', () => {
+      return supertest(app)
+        .get('/api/comments/1')
+        .set('Authorization', helpers.makeAuthHeader(testUser))
+        .expect(200, expectedPost);
+    }); 
+
 
   });
 
