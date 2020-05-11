@@ -14,14 +14,14 @@ function makeUsersArray() {
     {
       id: 1,
       username: 'test-user-1',
-      name: 'Testuser1',
+      name: 'Test user 1',
       password: 'Pass123!',
       userImg : 'http://userImg1.com'
     },
     {
       id: 2,
       username: 'test-user-2',
-      name: 'Testuser2',
+      name: 'Test user 2',
       password: 'Password123!',
       userImg : 'http://userImg2.com'
     },
@@ -134,7 +134,7 @@ function seedUsers(db, users) {
     //  await trx.raw(
     //    `SELECT setval('user_id_seq', ?)`,
     //    [users[users.length - 1].id],
-     // )
+    //  )
     })
   }
   module.exports = {
