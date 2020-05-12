@@ -193,7 +193,7 @@ describe.only('Posts Endpoints', function () {
     })
   })
 
-  describe('GET /users/:user_id', () => {
+  describe('GET /api/posts/users/:user_id', () => {
     const testUser = {
       id: 1,
       username: 'test-user-1',
@@ -204,7 +204,7 @@ describe.only('Posts Endpoints', function () {
 
     const testUserPosts = [
     { 
-        id: 1,
+        id: 2,
         memeImg: 'testImg',
         description: 'testDesc',
         likes: 0,
@@ -214,7 +214,7 @@ describe.only('Posts Endpoints', function () {
 
   const expectedUserPosts = [
     {
-      id: 1,
+      id: 2,
       memeImg: 'testImg',
       description: 'testDesc',
       likes: 0,
@@ -246,14 +246,14 @@ describe.only('Posts Endpoints', function () {
 
   it('responds with 200 and all the user posts', () => {
     return supertest(app)
-    .get('/users/:user_id')
+    .get('/api/posts/users/:user_id')
     .set('Authorization', helpers.makeAuthHeader(testUser))
         .send(expectedUserPosts)
         .expect(200)
   })
   })
 
-  describe('GET /:post_id', () => {
+  describe('GET /api/:post_id', () => {
     const testUser = {
       id: 1,
       username: 'test-user-1',
@@ -262,7 +262,7 @@ describe.only('Posts Endpoints', function () {
       userImg: 'testImg'
     };
 
-    const testPosts = [
+    const testPosts = 
     { 
         id: 1,
         memeImg: 'testImg',
@@ -270,10 +270,9 @@ describe.only('Posts Endpoints', function () {
         likes: 0,
         user_id: 1
     }
-  ]
+  
 
-  const expectedPosts = [
-    {
+  const expectedPosts = {
       id: 1,
       memeImg: 'testImg',
       description: 'testDesc',
@@ -281,17 +280,7 @@ describe.only('Posts Endpoints', function () {
       user_id: 1,
       userImg: 'testImg',
       username: 'test-user-1'
-    },
-    {
-      id: 2,
-      memeImg: 'testImg2',
-      description: 'testDesc2',
-      likes: 0,
-      user_id: 1,
-      userImg: 'testImg',
-      username: 'test-user-1'
-    }
-  ];
+    };
 
   beforeEach('inserts users and posts', () => {
     return db
@@ -306,7 +295,7 @@ describe.only('Posts Endpoints', function () {
 
   it('responds with 200 and all the posts', () => {
     return supertest(app)
-    .get('/users/:user_id')
+    .get('/api/:post_id')
     .set('Authorization', helpers.makeAuthHeader(testUser))
         .send(expectedPosts)
         .expect(200)
