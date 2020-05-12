@@ -8,7 +8,7 @@ describe('User Endpoints', function () {
   
   const testUsers = helpers.makeUsersArray();
   const testUser = testUsers[0];
-  console.log(testUsers)
+  
   
   before('make knex instance', () => {
     db = helpers.makeKnexInstance();
@@ -36,7 +36,7 @@ describe('User Endpoints', function () {
         name: 'test user 1',
         password: 'Password123!',
         userImg: 'http://userImg.com'
-    };
+      };
       it(`responds with 400 required error when '${field}' is missing`, () => {
         delete registerAttemptBody[field];
   
@@ -128,31 +128,31 @@ describe('User Endpoints', function () {
         .expect(400, { error: `Username already taken` });
     });
     
-      it(`stores the new user in db with bcrypted password`, () => {
-        const newUser = {
-          username: 'test username',
-          password: '11AAaa!!',
-          name: 'test name',
-        };
-        return supertest(app)
-          .post('/api/users')
-          .send(newUser)
-          .expect(res =>
-            db
-              .from('user')
-              .select('*')
-              .where({ id: res.body.id })
-              .first()
-              .then(row => {
-                expect(row.username).to.eql(newUser.username);
-                expect(row.name).to.eql(newUser.name);
+    it(`stores the new user in db with bcrypted password`, () => {
+      const newUser = {
+        username: 'test username',
+        password: '11AAaa!!',
+        name: 'test name',
+      };
+      return supertest(app)
+        .post('/api/users')
+        .send(newUser)
+        .expect(res =>
+          db
+            .from('user')
+            .select('*')
+            .where({ id: res.body.id })
+            .first()
+            .then(row => {
+              expect(row.username).to.eql(newUser.username);
+              expect(row.name).to.eql(newUser.name);
   
-                return bcrypt.compare(newUser.password, row.password);
-              })
-              .then(compareMatch => {
-                expect(compareMatch).to.be.true;
-              })
-          );
-      });
+              return bcrypt.compare(newUser.password, row.password);
+            })
+            .then(compareMatch => {
+              expect(compareMatch).to.be.true;
+            })
+        );
     });
   });
+});
