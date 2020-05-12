@@ -156,6 +156,162 @@ describe.only('Posts Endpoints', function () {
       .expect(204)
     })
   })
+
+  describe ('DELETE /api/posts/:posts_id', () => {
+    const testUser = {
+      id: 1,
+      username: 'test-user-1',
+      name: 'Test user 1',
+      password: 'password',
+      userImg: 'testImg'
+    };
+
+    const testDelete = {
+      memeImg: 'testImg',
+      description: 'testDesc',
+      likes: 0,
+      user_id: 1,
+    }
+
+    beforeEach('inserts users and deletes', () => {
+      return db
+        .into('user')
+        .insert(testUser)
+        .then(() => {
+          return db
+          .into('posts')
+          .insert(testDelete)
+        })
+    })
+
+    it('responds with 204 and removes post', () => {
+      return supertest(app)
+        .delete('/api/posts/:posts_id')
+        .set('Authorization', helpers.makeAuthHeader(testUser))
+        .send(testDelete)
+        .expect(404)
+    })
+  })
+
+  describe('GET /users/:user_id', () => {
+    const testUser = {
+      id: 1,
+      username: 'test-user-1',
+      name: 'Test user 1',
+      password: 'password',
+      userImg: 'testImg'
+    };
+
+    const testUserPosts = [
+    { 
+        id: 1,
+        memeImg: 'testImg',
+        description: 'testDesc',
+        likes: 0,
+        user_id: 1
+    }
+  ]
+
+  const expectedUserPosts = [
+    {
+      id: 1,
+      memeImg: 'testImg',
+      description: 'testDesc',
+      likes: 0,
+      user_id: 1,
+      userImg: 'testImg',
+      username: 'test-user-1'
+    },
+    {
+      id: 2,
+      memeImg: 'testImg2',
+      description: 'testDesc2',
+      likes: 0,
+      user_id: 1,
+      userImg: 'testImg',
+      username: 'test-user-1'
+    }
+  ];
+
+  beforeEach('inserts users and user posts', () => {
+    return db
+      .into('user')
+      .insert(testUser)
+      .then(() => {
+        return db
+          .into('posts')
+          .insert(testUserPosts)
+      })
+  })
+
+  it('responds with 200 and all the user posts', () => {
+    return supertest(app)
+    .get('/users/:user_id')
+    .set('Authorization', helpers.makeAuthHeader(testUser))
+        .send(expectedUserPosts)
+        .expect(200)
+  })
+  })
+
+  describe('GET /:post_id', () => {
+    const testUser = {
+      id: 1,
+      username: 'test-user-1',
+      name: 'Test user 1',
+      password: 'password',
+      userImg: 'testImg'
+    };
+
+    const testPosts = [
+    { 
+        id: 1,
+        memeImg: 'testImg',
+        description: 'testDesc',
+        likes: 0,
+        user_id: 1
+    }
+  ]
+
+  const expectedPosts = [
+    {
+      id: 1,
+      memeImg: 'testImg',
+      description: 'testDesc',
+      likes: 0,
+      user_id: 1,
+      userImg: 'testImg',
+      username: 'test-user-1'
+    },
+    {
+      id: 2,
+      memeImg: 'testImg2',
+      description: 'testDesc2',
+      likes: 0,
+      user_id: 1,
+      userImg: 'testImg',
+      username: 'test-user-1'
+    }
+  ];
+
+  beforeEach('inserts users and posts', () => {
+    return db
+      .into('user')
+      .insert(testUser)
+      .then(() => {
+        return db
+          .into('posts')
+          .insert(testPosts)
+      })
+  })
+
+  it('responds with 200 and all the posts', () => {
+    return supertest(app)
+    .get('/users/:user_id')
+    .set('Authorization', helpers.makeAuthHeader(testUser))
+        .send(expectedPosts)
+        .expect(200)
+  })
+  })
 });
 
 
