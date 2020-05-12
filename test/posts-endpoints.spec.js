@@ -193,7 +193,7 @@ describe.only('Posts Endpoints', function () {
     })
   })
 
-  describe('GET /api/posts/users/:user_id', () => {
+  describe('GET /api/posts/users/1', () => {
     const testUser = {
       id: 1,
       username: 'test-user-1',
@@ -246,7 +246,7 @@ describe.only('Posts Endpoints', function () {
 
   it('responds with 200 and all the user posts', () => {
     return supertest(app)
-    .get('/api/posts/users/:user_id')
+    .get('/api/posts/users/1')
     .set('Authorization', helpers.makeAuthHeader(testUser))
         .send(expectedUserPosts)
         .expect(200)
@@ -295,7 +295,7 @@ describe.only('Posts Endpoints', function () {
 
   it('responds with 200 and all the posts', () => {
     return supertest(app)
-    .get('/api/:post_id')
+    .get('/api/posts/1')
     .set('Authorization', helpers.makeAuthHeader(testUser))
         .send(expectedPosts)
         .expect(200)
