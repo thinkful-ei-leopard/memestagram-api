@@ -20,7 +20,7 @@ describe.only('Posts Endpoints', function () {
   
   afterEach('cleanup', () => helpers.cleanTables(db));
 
-  describe.only('GET /api/posts', () => {
+  describe('GET /api/posts', () => {
     const testUser = {
       id: 1,
       username: 'test-user-1',
@@ -87,8 +87,8 @@ describe.only('Posts Endpoints', function () {
 
   });
 
-  describe ('POST /api/', () => {
-    let testUser = {
+  describe ('POST /api/posts', () => {
+    const testUser = {
       id: 1,
       username: 'test-user-1',
       name: 'Test user 1',
@@ -97,7 +97,6 @@ describe.only('Posts Endpoints', function () {
     };
 
     const testPost = {
-      id: 1,
       memeImg: 'testImg',
       description: 'testDesc',
       likes: 0,
@@ -114,7 +113,49 @@ describe.only('Posts Endpoints', function () {
             .insert(testPost);
         });
     });
+    it ('responds 201 when user posts', () => {
+      return supertest(app)
+        .post('/api/posts')
+        .set('Authorization', helpers.makeAuthHeader(testUser))
+        .send(testPost)
+        .expect(201);
+    })
   });
+
+  describe ('PATCH /api/posts', () => {
+    const testUser = {
+      id: 1,
+      username: 'test-user-1',
+      name: 'Test user 1',
+      password: 'password',
+      userImg: 'testImg'
+    };
+
+    const testUpdate = {
+      id: 1,
+      likes: 0,
+      memeImg: 'testMeme',
+      user_id: 1
+    }
+
+    beforeEach('insert users and update', () => {
+      return db
+        .into('user')
+        .insert(testUser)
+        .then(() => {
+          return db
+          .into('posts')
+          .insert(testUpdate)
+        })
+    })
+    it('responds 204 when user likes', () => {
+      return supertest(app)
+      .patch('/api/posts')
+      .set('Authorization', helpers.makeAuthHeader(testUser))
+      .send(testUpdate)
+      .expect(204)
+    })
+  })
 });
 
 
