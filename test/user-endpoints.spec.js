@@ -9,7 +9,6 @@ describe('User Endpoints', function () {
   const testUsers = helpers.makeUsersArray();
   const testUser = testUsers[0];
   
-  
   before('make knex instance', () => {
     db = helpers.makeKnexInstance();
     app.set('db', db);
