@@ -1,5 +1,7 @@
 
+
 //To prevent cross-site-scripting
+
 const xss = require('xss');
 
 const PostsService={
@@ -7,7 +9,7 @@ const PostsService={
     return db
       .from('posts')
       .select('posts.*', 'user.username', 'user.userImg')
-      .leftJoin('user','posts.user_id', 'user.id');
+      .leftJoin('user','posts.user_id', 'user.id')    
   },
   getById(db, id){
     return db
@@ -55,7 +57,7 @@ const PostsService={
       likes:post.likes,
       user_id:post.user_id,
       username:post.username,
-      userImg:post.userImg
+      userImg:post.userImg,
     };
   }
     

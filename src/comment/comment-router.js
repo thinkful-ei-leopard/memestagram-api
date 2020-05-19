@@ -1,3 +1,4 @@
+'use strict';
 const express = require('express');
 const path = require('path');
 const CommentsService = require('./comment-service');
@@ -33,8 +34,10 @@ commentsRouter
       })
       .catch(next);
   })
+
   .post(requireAuth, jsonBodyParser, (req, res, next) => {
     const {comment, user_id, posts_id}=req.body;
+
     const newComment ={comment, user_id, posts_id};
     for (const [key, value] of Object.entries(newComment))
       if (value == null)
