@@ -10,7 +10,6 @@ const postsRouter = require('./posts/posts-router');
 const userRouter = require('./user/user-router');
 const authRouter = require('./auth/auth-router');
 const commentsRouter = require('./comment/comment-router');
-
 const cloudinary = require('cloudinary')
 const formData = require('express-form-data')
 const app = express ();
