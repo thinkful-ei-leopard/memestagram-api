@@ -28,7 +28,7 @@ Login user account. Requires a request body
     
   }
   
-### POST/api/user
+### POST/api/users
 
 Create a new user account. Requires a request body.
 
@@ -53,6 +53,25 @@ Create a new user account. Requires a request body.
     "password":"Demopass123!"
     
   }
+
+### PATCH/api/users/:user_id
+
+Updated username. Requires a request body.
+
+PATCH https://pacific-beach-23085.herokuapp.com/api/users/:user_id
+
+REQ BODY: { 
+    
+    "username":"Andy",
+    
+    "user_id":"1",
+  
+   }
+
+  HTTP STATUS 204 No Content 
+  
+  Location: https://pacific-beach-23085.herokuapp.com/api/users/:user_id
+
   
 ### GET/api/posts
 
@@ -308,6 +327,10 @@ Click on "AddPost" to create a new posts
 
 ![6](https://user-images.githubusercontent.com/47201201/81482954-6c652280-91ef-11ea-846d-e26fdfbe6179.png)
 
+Click on "Edit" to edit their username:
+
+![setting](https://user-images.githubusercontent.com/47201201/82388611-ddc28380-99ee-11ea-9367-5213a790cc6c.png)
+
 
 Click your profile image to see all of your posts
 
@@ -329,6 +352,8 @@ But despite their popularity, it seems like there is no place for us to share or
 -click on user name to see all posts from that user
 
 -click on the posts image or comment button to see the comments and add comment
+
+-click on edit to update the username
 
 -allow for users to add a comment or click like on others' posts
 
