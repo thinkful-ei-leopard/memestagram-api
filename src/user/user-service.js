@@ -36,6 +36,11 @@ const UserService = {
   hashPassword(password) {
     return bcrypt.hash(password, 12);
   },
+  updateUserName(db, id, newName){
+    return db('user')
+      .where({id})
+      .update({username:newName});     
+  },
   serializeUser(user) {
     return {
       id: user.id,
