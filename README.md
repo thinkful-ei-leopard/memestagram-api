@@ -316,7 +316,7 @@ Click a heart to add likes to that post
 
 Click on a username to see more memes from the user
 
-![user](https://user-images.githubusercontent.com/47201201/82389831-fb451c80-99f1-11ea-8381-4e5aaf5ab760.png)
+![user](https://user-images.githubusercontent.com/47201201/82390150-c8e7ef00-99f2-11ea-9c81-b45a690cb62e.png)
 
 Click on commnet or image to to add and see comments
 
@@ -329,7 +329,7 @@ Click on "AddPost" to create a new posts
 
 Click on "Edit" to edit their username:
 
-![edit](https://user-images.githubusercontent.com/47201201/82389826-f97b5900-99f1-11ea-8d00-22148c27a2a6.png)
+![edit](https://user-images.githubusercontent.com/47201201/82390147-c5ecfe80-99f2-11ea-9a20-f12bc4b6abcb.png)
 
 
 Click your profile image to see all of your posts
