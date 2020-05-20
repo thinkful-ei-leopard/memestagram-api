@@ -312,29 +312,29 @@ Click on the trash can to delete your post
 
 Click a heart to add likes to that post
 
-![dash](https://user-images.githubusercontent.com/47201201/82390387-6c390400-99f3-11ea-8216-c92795a9e114.png)
+![dash](https://user-images.githubusercontent.com/47201201/82391536-6264d000-99f6-11ea-8c12-7f9766038d5f.png)
 
 Click on a username to see more memes from the user
 
-![user](https://user-images.githubusercontent.com/47201201/82390150-c8e7ef00-99f2-11ea-9c81-b45a690cb62e.png)
+![user](https://user-images.githubusercontent.com/47201201/82391497-4cefa600-99f6-11ea-8e2e-a62ee7d095ad.png)
 
 Click on commnet or image to to add and see comments
 
-![post](https://user-images.githubusercontent.com/47201201/82390384-6ba06d80-99f3-11ea-88fb-39d30556a3ff.png)
+![post](https://user-images.githubusercontent.com/47201201/82391499-4e20d300-99f6-11ea-973a-ff9a927637fd.png)
 
 
 Click on "AddPost" to create a new posts
 
-![add](https://user-images.githubusercontent.com/47201201/82390388-6d6a3100-99f3-11ea-995a-ab3e89624673.png)
+![add](https://user-images.githubusercontent.com/47201201/82391513-55e07780-99f6-11ea-8881-e82ca797e746.png)
 
 Click on "Edit" to edit their username:
 
-![edit](https://user-images.githubusercontent.com/47201201/82390147-c5ecfe80-99f2-11ea-9a20-f12bc4b6abcb.png)
+![edit](https://user-images.githubusercontent.com/47201201/82391504-51b45a00-99f6-11ea-85c2-0c7da5727d0e.png)
 
 
 Click your profile image to see all of your posts
 
-![own](https://user-images.githubusercontent.com/47201201/82390381-6a6f4080-99f3-11ea-93cc-bb7c866859ee.png)
+![own](https://user-images.githubusercontent.com/47201201/82391496-4c570f80-99f6-11ea-89a9-0cdb9d3525a3.png)
 
 
 ### What is Memestagram
